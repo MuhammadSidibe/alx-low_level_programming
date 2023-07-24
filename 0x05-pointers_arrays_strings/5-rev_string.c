@@ -3,6 +3,9 @@
 /***
  * rev_string - Reverses a string
  * @s: input string
+ *
+ * This function takes an input string 's' and reverses it in place,
+ * meaning it modifies the original string without using additional memory.
  * Return: string in reverse
  */
 
