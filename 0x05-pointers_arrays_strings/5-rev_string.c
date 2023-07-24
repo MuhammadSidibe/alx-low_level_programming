@@ -8,7 +8,6 @@
  * meaning it modifies the original string without using additional memory.
  * Return: string in reverse
  */
-
 void rev_string(char *s)
 {
 	char rev = s[0];
@@ -24,4 +23,5 @@ void rev_string(char *s)
 		s[i] = s[counter];
 		s[counter] = rev;
 	}
+	_putchar('\n');
 }
