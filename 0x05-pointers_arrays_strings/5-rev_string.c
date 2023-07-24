@@ -2,26 +2,22 @@
 
 /***
  * rev_string - Reverses a string
- * @s: input string
- *
- * This function takes an input string 's' and reverses it in place,
- * meaning it modifies the original string without using additional memory.
- * Return: string in reverse
+ * @s: The string to be modified
+ * Return: void
  */
-void rev_string(char *s)
-{
-	char rev = s[0];
-	int counter = 0;
-	int i;
 
-	while (s[counter] != '\0')
-		counter++;
-	for (i = 0; i < counter; i++)
+void rev_string(char *s)
+
+{
+	int len = 0, index = 0,;
+	char tmp;
+
+	while (s[index++])
+		len++;
+	for (index = len - 1; index >= len / 2; index--)
 	{
-		counter--;
-		rev = s[i];
-		s[i] = s[counter];
-		s[counter] = rev;
+		tmp = s[index];
+		s[index] = s[len - index - 1];
+		s[len - index - 1] = tmp;
 	}
-	_putchar('\n');
 }
