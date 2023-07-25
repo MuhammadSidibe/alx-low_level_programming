@@ -4,7 +4,7 @@
  * print_array - prints number of an array
  *
  * @a: pointer to an int
- * @n: no of array
+ * @n: number of array
  *
  * return: void
  */
@@ -17,9 +17,9 @@ void print_array(int *a, int n)
 		printf("%d", a[i]);
 
 	if (i !=(n - 1))
-	{
-		printf(", ");
-	}
+		{
+			printf(", ");
+		}
 	}
 	printf('\n');
 }
