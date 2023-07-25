@@ -4,7 +4,7 @@
  * in reverse mode
  *
  * @s: The string input
- * Return: nothing
+ * Return: void
  */
 void rev_string(char *s)
 {
