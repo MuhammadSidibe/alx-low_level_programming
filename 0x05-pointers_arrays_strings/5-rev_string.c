@@ -6,7 +6,7 @@
  * @s: The string input
  * Return: nothing
  */
-void rev_string(char *s)
+char rev_string(char *s)
 {
 	int length, i;
 	char temp;
