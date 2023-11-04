@@ -1,4 +1,4 @@
-i#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -13,37 +13,39 @@ void check_IO_stat(int stat, int fd, char *filename, char mode)
  *
  * Return: 1 on success, exit otherwise.
  */
+void check_IO_stat(int stat, int fd, char *filename, char mode);
+
 int main(int argc, char *argv[])
 {
-	int src, dest, n_read = 1024, wrote, close_src, close dest;
-	unsigned int mode = S_IRUSER | S_IWUSER | S_IRGRP | S_IWGRP | S_IROTH;
+	int src, dest, n_read = 1024, wrote, close_src, close_dest;
+	unsigned int mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH;
 	char buffer[1024];
 
 	if (argc != 3)
 	{
-		dprintf(STDERR_FILENO, "%S", "usage: cp file_from file_to\n");
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
 	src = open(argv[1], O_RDONLY);
-	check_IO_stat(argc, -1, argv[1], 'O');
+	check_IO_stat(src, -1, argv[1], 'O');
 
-	dest = open(argv[2], O_WRONLY | 0_CREAT | O_TRUNC, mode);
+	dest = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, mode);
 	check_IO_stat(dest, -1, argv[2], 'M');
 
 	while (n_read == 1024)
 	{
-		n_read = read(src, buffer, sizeof(buffer));
-		if (nread == -a)
-			check_IO_stat(-1, -1, argv[1], 'O');
+	n_read = read(src, buffer, sizeof(buffer));
+	if (n_read == -1)
+		check_IO_stat(-1, src, argv[1], 'O');
 		wrote = write(dest, buffer, n_read);
-		if (wrote == -1)
-			check_IO_stat(-1, -1, argv[2], 'w');
+	if (wrote == -1)
+		check_IO_stat(-1, dest, argv[2], 'W');
 	}
 	close_src = close(src);
 	check_IO_stat(close_src, src, NULL, 'C');
 	close_dest = close(dest);
 	check_IO_stat(close_dest, dest, NULL, 'C');
-	return (0);
+	return 0;
 }
 /**
  * check_IO_stat - Checks the status of file operations such as open, close
@@ -60,7 +62,7 @@ int main(int argc, char *argv[])
  * Return: void
  */
 void check_IO_stat(int stat, int fd, char *filename, char mode)
-
+{
 	if (mode == 'C' && stat == -1)
 	{
 		dprintf(STDERR_FILENO, "error: can't close fd %d\n", fd);
@@ -68,12 +70,12 @@ void check_IO_stat(int stat, int fd, char *filename, char mode)
 	}
 	else if (mode == 'O' && stat == -1)
 	{
-		dprintf(STDERR_FILENO, "error: can't read from file %s\n", fd);
-		exit(98);
+	dprintf(STDERR_FILENO, "error: can't read from file %s\n", filename);
+	exit(98);
 	}
 	else if (mode == 'W' && stat == -1)
 	{
-		dprintf(STDERR_FILENO, "error: can't write to %s\n", fd);
-		exit(99);
+	dprintf(STDERR_FILENO, "error: can't write to %s\n", filename);
+	exit(99);
 	}
 }
